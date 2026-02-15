@@ -32,32 +32,33 @@ export default function WeightInput({ todayWeight, onSave }: Props) {
   const isUpdate = todayWeight !== null;
 
   return (
-    <div className="flex flex-col gap-3">
-      <label className="text-sm font-medium text-gray-500">
-        오늘의 체중 (kg)
-      </label>
+    <div className="rounded-2xl bg-white p-5 shadow-sm">
+      <h2 className="mb-3 text-base font-medium text-gray-800">오늘의 체중</h2>
       <div className="flex gap-2">
         <input
           type="number"
           step="0.01"
           min="0"
-          placeholder="예: 5.40"
+          placeholder="체중 입력"
           value={value}
           onChange={(e) => setValue(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && handleSave()}
-          className="flex-1 rounded-xl border border-gray-200 bg-white px-4 py-3 text-lg font-semibold text-gray-800 outline-none transition-colors focus:border-orange-400 focus:ring-2 focus:ring-orange-100"
+          className="flex-1 rounded-xl border border-gray-200 bg-white px-4 py-2.5 text-base text-gray-800 outline-none transition-colors focus:border-transparent focus:ring-2 focus:ring-orange-400"
         />
+        <div className="flex items-center rounded-xl border border-gray-200 bg-gray-50 px-3">
+          <span className="text-sm text-gray-600">kg</span>
+        </div>
         <button
           onClick={handleSave}
           disabled={saving || !value}
-          className="rounded-xl bg-orange-500 px-5 py-3 text-sm font-semibold text-white transition-all hover:bg-orange-600 active:scale-95 disabled:opacity-50"
+          className="rounded-xl bg-orange-500 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-orange-600 disabled:cursor-not-allowed disabled:bg-gray-300"
         >
           {saving ? "..." : saved ? "OK" : isUpdate ? "수정" : "저장"}
         </button>
       </div>
       {isUpdate && (
-        <p className="text-xs text-gray-400">
-          오늘 이미 {todayWeight.toFixed(2)}kg 기록됨 — 수정하면 덮어씁니다
+        <p className="mt-2 text-xs text-gray-400">
+          오늘 이미 {todayWeight.toFixed(2)}kg 기록됨
         </p>
       )}
     </div>
